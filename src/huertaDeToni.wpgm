@@ -10,7 +10,7 @@ program huertaDeToni {
 	// Configuramos una imagen de fondo, que se repite para cada celda del tablero.
 	game.ground("tierra.png")
 	
-	// Agregamos al amigo Toni.
+	// Agregamos al amigo Toni. modif para moverse solo con .addVisualCharacter(toni)
 	game.addVisual(toni)
 	
 	/*
@@ -29,7 +29,29 @@ program huertaDeToni {
 	 * De yapa, mostramos cómo agregar varios objetos de una utilizando
 	 * un rango (1..13), que equivale a la lista [1, 2, 3, ..., 13].
 	 */
-	(1..13).forEach { x => game.addVisualIn(new Maiz(), game.at(x, 5)) }
+	"(1..13).forEach { x => game.addVisualIn(new Maiz(), game.at(x, 5)) }"
 		
+	"keyboard.tecla().onPressDo({ })"
+	
+	keyboard.up().onPressDo({ toni.position(toni.position().up(1))	})
+	keyboard.down().onPressDo({	toni.position(toni.position().down(1))	})
+	keyboard.left().onPressDo({	toni.position(toni.position().left(1))	})
+	keyboard.right().onPressDo({ toni.position(toni.position().right(1)) })
+	
+	keyboard.m().onPressDo({ toni.sembrarMaiz()	})
+	keyboard.t().onPressDo({ toni.sembrarTrigo() })
+	keyboard.o().onPressDo({ toni.sembrarTomaco() })
+	
+	keyboard.a().onPressDo({ toni.regarTodo()	})
+	keyboard.r().onPressDo({ toni.regarActual() })
+	
+	keyboard.x().onPressDo({ toni.cosecharTodo() })
+	keyboard.c().onPressDo({ toni.cosecharActual() })
+	
+	keyboard.v().onPressDo({ toni.venderCosecha() })
+	keyboard.space().onPressDo({ toni.estadoActual() })
+	
+	keyboard.l().onPressDo({ pachamama.llover() })
+	
 	game.start()
 }
